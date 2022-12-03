@@ -1,4 +1,4 @@
-import functions
+import library.functions as functions
 import tkinter as tk
 turn = 0
 counter = 0
@@ -35,6 +35,7 @@ def click(event):
     counter = 0
     board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
     flag_thing = False
+    flag=False
     canvas.delete('all')
     canvas.create_text(150, 125, text="X wins", fill="black", font=('Helvetica 15 bold'))
     menu_button=tk.Button(root, text="Menu", command = menu)
@@ -44,6 +45,7 @@ def click(event):
     counter = 0
     board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
     flag_thing = False
+    flag=False
     canvas.delete('all')
     canvas.create_text(150, 125, text="O wins", fill="black", font=('Helvetica 15 bold'))
     menu_button=tk.Button(root, text="Menu", command = menu)
@@ -53,11 +55,11 @@ def click(event):
     counter = 0
     board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
     flag_thing = False
+    flag=False
     canvas.delete('all')
     canvas.create_text(150, 120, text="Draw", fill="black", font=('Helvetica 15 bold'))
     menu_button=tk.Button(root, text="Menu", command = menu)
     menu_button.place(x=122, y=150)
-    counter=0
   if flag:
     turn += 1
     turn %= 2
@@ -68,7 +70,8 @@ def main():
   global flag_thing
   flag_thing = True
   canvas.delete('all')
-  play.place_forget()
+  play1.place_forget()
+  play2.place_forget()
   canvas.create_line(100,0,100,300, fill="black", width=3)  
   canvas.create_line(200,0,200,300, fill="black", width=3)
   canvas.create_line(0,100,300,100, fill="black", width=3)
@@ -77,18 +80,22 @@ def main():
 
 
 def menu():
-  global play
+  global play2
+  global play1
   canvas.delete('all')
   menu_button.place_forget()
   canvas.create_text(150,70, text="Menu", fill="black",font=('Helvetica 15 bold'))
-  
-  play=tk.Button(root, text="play", command = main)
-  play.place(x=125, y=90)
+  play2=tk.Button(root, text="Two Players", command = main)
+  play2.place(x=103, y=90)
+  play1=tk.Button(root, text="One Player", command = main)
+  play1.place(x=107,y=120)
 
 canvas.delete('all')
 canvas.create_text(150,70, text="Menu", fill="black",font=('Helvetica 15 bold'))
-play=tk.Button(root, text="play", command = main)
-play.place(x=125, y=90)
+play2=tk.Button(root, text="Two Players", command = main)
+play2.place(x=103, y=90)
+play1=tk.Button(root, text="One Player", command = main)
+play1.place(x=107,y=120)
 
 root.mainloop()
 
