@@ -66,7 +66,7 @@ def twoPlayer(event):
     counter += 1
 
 
-#Runs when three player button is clicked
+#Runs when one player button is clicked
 def onePlayer(event) :
   pass
 
