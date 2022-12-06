@@ -1,12 +1,14 @@
 import library.functions as functions
 import library.ai as ai
 import tkinter as tk
+import time
 turn = 0
 counter = 0
 board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 flag_thing = True
 root=tk.Tk()
 root.geometry("300x300")
+root.title("Tic-Tac-Toe")
 canvas=tk.Canvas(root, width=999, height=999)
 canvas.pack()
 
@@ -68,7 +70,60 @@ def twoPlayer(event):
 
 #Runs when one player button is clicked
 def onePlayer(event) :
-  pass
+  global turn
+  global counter
+  global menu_button
+  global board
+  global flag_thing
+  flag = False
+  j = functions.get_cellpos(event)[0]
+  i = functions.get_cellpos(event)[1] 
+  if board[j][i]==0 and flag_thing:
+    canvas.create_line(100*i,100*j,100*(i+1),100*(j+1), fill="red", width=3)
+    canvas.create_line(100*(i+1),100*j,100*i,100*(j+1), fill="red", width=3)
+    board[j][i] = 1 #x
+    flag = True
+  compMove=ai.compMove(board)
+  print(compMove)
+  j = compMove[0]
+  i = compMove[1]
+  if flag and flag_thing:
+    canvas.create_oval(100*(i+1),100*j,100*i,100*(j+1), outline="blue",width=3)
+    board[j][i] = 2 #o
+    flag = True
+  if flag_thing:
+    if functions.detect_win(board) == 1:
+      turn = 0
+      counter = 0
+      board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+      flag_thing = False
+      flag=False
+      canvas.delete('all')
+      canvas.create_text(150, 125, text="X wins", fill="black", font=('Helvetica 15 bold'))
+      menu_button=tk.Button(root, text="Menu", command = menu)
+      menu_button.place(x=120, y=150)
+    elif functions.detect_win(board) == 2:
+      turn = 0
+      counter = 0
+      board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+      flag_thing = False
+      flag=False
+      canvas.delete('all')
+      canvas.create_text(150, 125, text="O wins", fill="black", font=('Helvetica 15 bold'))
+      menu_button=tk.Button(root, text="Menu", command = menu)
+      menu_button.place(x=125, y=150)
+    if counter == 8:
+      turn = 0
+      counter = 0
+      board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+      flag_thing = False
+      flag=False
+      canvas.delete('all')
+      canvas.create_text(150, 120, text="Draw", fill="black", font=('Helvetica 15 bold'))
+      menu_button=tk.Button(root, text="Menu", command = menu)
+      menu_button.place(x=122, y=150)
+  if flag:
+    counter += 2
 
 #Sets up the tic-tac-toe board
 def main():
@@ -87,7 +142,6 @@ def main():
 def menu():
   global play2
   global play1
-  global menu_button
   canvas.delete('all')
   menu_button.place_forget()
   canvas.create_text(150,70, text="Menu", fill="black",font=('Helvetica 15 bold'))
