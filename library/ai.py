@@ -29,13 +29,13 @@ def compMove(board):
   elif board[2][2]==0:
     return [2,2]
     #Fifth priority is everything else
-  if board[0,1]==0:
+  if board[0][1]==0:
     return [0,1]
-  elif board[1,0]==0:
+  elif board[1][0]==0:
     return [1,0]
-  elif board[1,2]==0:
+  elif board[1][2]==0:
     return [1,2]
-  elif board[2,1]==0:
+  elif board[2][1]==0:
     return [2,1]
 
 #Find if the human opponent has a two in a row
