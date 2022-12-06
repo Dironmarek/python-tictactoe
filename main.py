@@ -83,14 +83,15 @@ def onePlayer(event) :
     canvas.create_line(100*(i+1),100*j,100*i,100*(j+1), fill="red", width=3)
     board[j][i] = 1 #x
     flag = True
+    counter += 1
   compMove=ai.compMove(board)
-  print(compMove)
-  j = compMove[0]
-  i = compMove[1]
-  if flag and flag_thing:
-    canvas.create_oval(100*(i+1),100*j,100*i,100*(j+1), outline="blue",width=3)
-    board[j][i] = 2 #o
-    flag = True
+  if not(compMove is None):
+    j = compMove[0]
+    i = compMove[1]
+    if flag and flag_thing:
+      canvas.create_oval(100*(i+1),100*j,100*i,100*(j+1), outline="blue",width=3)
+      board[j][i] = 2 #o
+      counter += 1
   if flag_thing:
     if functions.detect_win(board) == 1:
       turn = 0
@@ -112,7 +113,7 @@ def onePlayer(event) :
       canvas.create_text(150, 125, text="O wins", fill="black", font=('Helvetica 15 bold'))
       menu_button=tk.Button(root, text="Menu", command = menu)
       menu_button.place(x=125, y=150)
-    if counter == 8:
+    if counter == 9:
       turn = 0
       counter = 0
       board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
@@ -122,8 +123,6 @@ def onePlayer(event) :
       canvas.create_text(150, 120, text="Draw", fill="black", font=('Helvetica 15 bold'))
       menu_button=tk.Button(root, text="Menu", command = menu)
       menu_button.place(x=122, y=150)
-  if flag:
-    counter += 2
 
 #Sets up the tic-tac-toe board
 def main():
